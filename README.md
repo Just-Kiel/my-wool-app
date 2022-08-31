@@ -1,6 +1,7 @@
 # my-wool-app
 Project made with Vue.js to do a web app for crochet projects.
 First project in Vue.js so it's not really perfect.
+Also using Vue Router and probably Vuex or Pinia soon
 
 ## Project setup
 ```

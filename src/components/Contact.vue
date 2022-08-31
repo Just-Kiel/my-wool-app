@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="contact">
         <h1>Contact</h1>
         <li v-for="link in links" :key="link">
             <a v-bind:href="link.url">
@@ -34,6 +34,9 @@ export default {
     padding-top: 1vh;
     padding-bottom: 1vh;
     background-color: #2c3e50;
+}
+#contact{
+    width: 100vw;
 }
 h1{
     margin: 0;
