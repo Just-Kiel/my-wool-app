@@ -1,6 +1,15 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+
+  <!-- Router permettant de diriger vers les différentes views de la web app -->
+  <nav>
+    <router-link to="/">Accueil</router-link> | 
+    <router-link to="/about">A propos</router-link>
+    
+  </nav>
+  <router-view/>
+
   <Landing msg="Coucou c'est mon landing" message="oui"/>
   <Contact />
 </template>
