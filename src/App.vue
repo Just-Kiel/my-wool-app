@@ -3,7 +3,8 @@
   <nav>
     <router-link to="/">Accueil</router-link> | 
     <router-link to="/about">A propos</router-link> |
-    <router-link to="/login">Se connecter</router-link>
+    <router-link to="/profile" v-if="userID != undefined">Profil</router-link>
+    <router-link to="/login" v-else>Se connecter</router-link>
     
   </nav>
   <router-view/>
@@ -18,6 +19,11 @@ import Contact from './components/Contact.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      userID: localStorage.getItem('userID'),
+    }
+  },
   components: {
     // Landing,
     Contact

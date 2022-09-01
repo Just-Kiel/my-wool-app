@@ -8,12 +8,15 @@
       <input v-model="email" class="form-row__input" type="text" placeholder="Adresse mail"/>
     </div>
     <div class="form-row" v-if="mode == 'create'">
-      <input v-model="prenom" class="form-row__input" type="text" placeholder="Prénom"/>
-      <input v-model="nom" class="form-row__input" type="text" placeholder="Nom"/>
+      <input v-model="pseudo" class="form-row__input" type="text" placeholder="Pseudo"/>
     </div>
     <div class="form-row">
       <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
     </div>
+    <div class="form-row" v-if="mode == 'create'">
+      <input v-model="confirmpassword" class="form-row__input" type="password" placeholder="Confirmer mot de passe"/>
+    </div>
+    <!-- TODO status handle -->
     <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
       Adresse mail et/ou mot de passe invalide
     </div>
@@ -33,29 +36,28 @@
   </div>
 </template>
 
-// <script>
-import { mapState } from 'vuex'
-export default {
-  name: 'Login',
-  data: function () {
-    return {
-      mode: 'login',
-      email: '',
-      prenom: '',
-      nom: '',
-      password: '',
+<script>
+import axios from "axios";
+const customConfig = {
+    headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
     }
-  },
-  mounted: function () {
-    if (this.$store.state.user.userId != -1) {
-      this.$router.push('/profile');
-      return ;
-    }
-  },
-  computed: {
+};
+
+export default{
+    data() {
+        return {
+            mode: 'login',
+            email: '',
+            pseudo: '',
+            password: '',
+            confirmpassword: '',
+        }
+    },
+    computed: {
     validatedFields: function () {
       if (this.mode == 'create') {
-        if (this.email != "" && this.prenom != "" && this.nom != "" && this.password != "") {
+        if (this.email != "" && this.pseudo != "" && this.password != "" && this.confirmpassword != "") {
           return true;
         } else {
           return false;
@@ -68,40 +70,49 @@ export default {
         }
       }
     },
-    ...mapState(['status'])
-  },
-  methods: {
-    switchToCreateAccount: function () {
-      this.mode = 'create';
     },
-    switchToLogin: function () {
-      this.mode = 'login';
+    methods: {
+        switchToCreateAccount: function () {
+            this.mode = 'create';
+        },
+        switchToLogin: function () {
+            this.mode = 'login';
+        },
+
+        createAccount: function () {
+            var data = new FormData();
+            data.append('pseudo', this.pseudo);
+            data.append('email', this.email);
+            data.append('password', this.password);
+            data.append('confirmpassword', this.confirmpassword);
+            axios.post('http://api-wool.just-kiel.fr/router/' + 'adduser', data, customConfig)
+            .then(function (response) {
+                console.log(response);
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        
+        login: function () {
+            var data = new FormData();
+            data.append('email', this.email);
+            data.append('password', this.password);
+
+            axios.post('http://api-wool.just-kiel.fr/router/' + 'connect', data, customConfig)
+            .then(function (response) {
+                console.log(response);
+                localStorage.setItem('userID', response.data.userID);
+                localStorage.setItem('pseudo', response.data.pseudo);
+                localStorage.setItem('email', response.data.mail);
+                window.location.href = "/profile";
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
     },
-    login: function () {
-      const self = this;
-      this.$store.dispatch('login', {
-        email: this.email,
-        password: this.password,
-      }).then(function () {
-        self.$router.push('/profile');
-      }, function (error) {
-        console.log(error);
-      })
-    },
-    createAccount: function () {
-      const self = this;
-      this.$store.dispatch('createAccount', {
-        email: this.email,
-        nom: this.nom,
-        prenom: this.prenom,
-        password: this.password,
-      }).then(function () {
-        self.login();
-      }, function (error) {
-        console.log(error);
-      })
-    },
-  }
 }
 </script>
 
