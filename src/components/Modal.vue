@@ -81,7 +81,7 @@
         }
         var tempName = 'project_' + this.countProject;
 
-        let data = '{ "idProject": ' + this.countProject + ', "nameProject": "' + this.nameProject + '", "descriptionProject": "' + this.descriptionProject +'" }';
+        let data = '{ "idProject": ' + this.countProject + ', "nameProject": "' + this.nameProject + '", "descriptionProject": "' + this.descriptionProject +'", "subparts": []}';
 
         localStorage.setItem(tempName, data);
         // console.log(localStorage);
@@ -103,7 +103,7 @@
 </script>
 
 <style>
-  .modal-backdrop {
+  /* .modal-backdrop {
     position: absolute;
     left: 50vw;
     min-height: 40vh;
@@ -195,5 +195,5 @@
   }
   .form-row__input::placeholder {
     color:#aaaaaa;
-  }
+  } */
 </style>

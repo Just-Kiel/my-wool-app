@@ -1,7 +1,7 @@
 <template>
     <h1>Bienvenue !</h1>
 
-    <button @click="showModal">+ Créer un projet</button>
+    <i-button color="secondary" @click="showModal">+ Créer un projet</i-button>
 
     <Modal
       v-show="isModalVisible"

@@ -1,11 +1,10 @@
 <template>
     <div class="liste">
-        <button @click="showProject"> {{ project_name }} </button>
+        <i-button outline color="secondary" @click="visible = true"> {{ project_name }} </i-button>
 
         <Project
+            v-model="visible"
             @delete="deleteProject"
-            v-show="isProjectVisible"
-            @close="closeProject"
             :project_name="project_name"
             :project_description="project_description"
             :project_id="project_id"
@@ -28,20 +27,12 @@ export default {
     },
     data() {
         return {
-            isProjectVisible: false,
+            visible: false,
         }
     },
     methods: {
         deleteProject() {
             this.$emit('delete', this.project_id);
-        },
-
-        showProject() {
-            this.isProjectVisible = true;
-        },
-        
-        closeProject() {
-            this.isProjectVisible = false;
         },
     },
 }
