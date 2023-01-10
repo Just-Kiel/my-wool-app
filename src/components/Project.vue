@@ -11,16 +11,14 @@
     <div class="subparts" v-if="checkProject[0] != null">
         <h2>Mes sous-parties :</h2>
         
-        <div class="subpart" v-for="(subpart) in checkProject" :key="subpart">
-          <h4>{{ subpart.nameSubpart }}</h4>
+        <div class="subpart" v-for="(subpart, index) in checkProject" :key="subpart">
 
-          <i-button-group>
-            <!-- TODO go to subpart -->
-            <i-button color="secondary">Aller</i-button>
-
-            <!-- TODO add delete subpart obviously -->
-            <i-button color="danger">Supprimer</i-button>
-          </i-button-group>
+          <Subpart
+            :project_name="project_name"
+            :subpart_name="subpart.nameSubpart"
+            :project_id="project_id"
+            :subpart_id="index"
+          />
         </div>
     </div>
 
@@ -41,8 +39,12 @@
 </template>
 
 <script>
+import Subpart from './Subpart.vue'
   export default {
     name: 'Project',
+    components: {
+      Subpart,
+    },
     data() {
         return {
             pseudo : localStorage.pseudo,
@@ -66,7 +68,7 @@
       createSubpart: function() {
         var tempName = 'project_' + this.project_id;
 
-        var newSubpart = { "nameSubpart": this.nameSubpart, "counters": null };
+        var newSubpart = { "nameSubpart": this.nameSubpart, "counters": [] };
 
         var sessionData = JSON.parse(localStorage.getItem(tempName));
 
@@ -90,22 +92,8 @@
     },
 
     checkProject() {
-      // var data = [];
-      // var tempCount = 0;
       var countSubpart = JSON.parse(localStorage.getItem("project_" + this.project_id));
-      // console.log(countSubpart.subparts.length)
-      
-      // while(countCounter >= tempCount){
-      //     var temp = JSON.parse(localStorage.getItem('project_' + tempCount));
 
-      //     if (temp != null) {
-      //         data.push(temp);
-      //     }
-
-      //     tempCount++;
-      // }
-
-      // console.log(data)
       return countSubpart.subparts
       }
     },

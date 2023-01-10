@@ -1,11 +1,10 @@
 <template>
     <h1>Bienvenue !</h1>
 
-    <i-button color="secondary" @click="showModal">+ Créer un projet</i-button>
+    <i-button color="secondary" @click="visible = true">+ Créer un projet</i-button>
 
     <Modal
-      v-show="isModalVisible"
-      @close="closeModal"
+      v-model="visible"
     />
 
     <div class="projects" v-if="allProjects[0] != null">
@@ -55,9 +54,10 @@ export default {
     data() {
         return {
             nbProjects: 0,
-            isModalVisible: false,
+            // isModalVisible: false,
             isProjectVisible: false,
             allProjects: data,
+            visible : false,
         }
     },
     created() {

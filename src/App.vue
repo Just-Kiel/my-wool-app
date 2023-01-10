@@ -8,13 +8,10 @@
     
   </nav>
   <router-view/>
-
-  <!-- <Landing msg="Coucou c'est mon landing" message="oui"/> -->
   <Contact />
 </template>
 
 <script>
-// import Landing from './components/Landing.vue'
 import Contact from './components/Contact.vue'
 
 export default {
@@ -25,7 +22,6 @@ export default {
     }
   },
   components: {
-    // Landing,
     Contact
   }
 }
@@ -62,7 +58,7 @@ img {
   max-width: 100%;
   border-radius: 8px;
 }
-.card {
+/* .card {
   margin: auto;
   max-width: 100%;
   width: 540px;
@@ -78,15 +74,16 @@ img {
   text-align: center;
   color:#666;
   font-weight: 500;
-}
+} */
   
-  .card__action {
+  /* .card__action {
     color:#2196F3;
     text-decoration: underline;
   }
   .card__action:hover {
     cursor:pointer;
-  }
+  } 
+  */
   .button--disabled {
     background:#cecece;
     color:#ececec

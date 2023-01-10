@@ -4,3 +4,7 @@ module.exports = defineConfig({
     '@inkline/inkline'
 ]
 })
+
+module.exports = {
+  publicPath: '/wool_app/'
+}

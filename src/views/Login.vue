@@ -16,6 +16,7 @@
     <div class="form-row" v-if="mode == 'create'">
       <input v-model="confirmpassword" class="form-row__input" type="password" placeholder="Confirmer mot de passe"/>
     </div>
+    
     <!-- TODO status handle -->
     <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
       Adresse mail et/ou mot de passe invalide
