@@ -6,5 +6,7 @@ module.exports = defineConfig({
 })
 
 module.exports = {
-  publicPath: '/wool_app/'
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/my-wool-app'
+  : '/'
 }
